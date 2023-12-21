@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Weekly Project</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <div class="member" onclick="displayMemberInfo(1)">
+        <img src="img/member1.png" alt="member1">
+      </div>
+      <div class="member" onclick="displayMemberInfo(2)">
+        <img src="img/member2.png" alt="member2">
+      </div>
+      <div class="member" onclick="displayMemberInfo(3)">
+        <img src="img/member3.png" alt="member3">
+      </div>
+      <div class="member" onclick="displayMemberInfo(4)">
+        <img src="img/member4.png" alt="member4">
+      </div>
+      <div class="member" onclick="displayMemberInfo(5)">
+        <img src="img/member5.png" alt="member5">
+      </div>
+      <div class="member" onclick="displayMemberInfo(6)">
+        <img src="img/member6.png" alt="member6">
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <div id="sidebar" class="sidebar">
+      <div class="header">
+        <p>CWT3 - Шоудалтын тайлан</p>
+        <span onclick="closeSidebar()">&times;</span>
+      </div>
+      <div class="main">
+        <div class="memberInfo" id="memberInfo">
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <audio id="backgroundSound" loop>
+      <source src="./sound/sound.mp3" type="audio/mp3">
+    </audio>  
+  </div>
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.style.left = '0';
+      overlay.style.display = 'block';
+    }
+
+    function closeSidebar() {
+      sidebar.style.left = '-360px';
+      overlay.style.display = 'none';
+    }
+
+    const members = [
+      {
+        name: 'Суурьбаатар',
+        age: 25,
+        role: 'Ахлах программ хөгжүүлэгч',
+        fact: 'Тэр нилээн уусан байсан ч Уул ахыг гэрт нь хүргэж өгсөн',
+        gif: 'https://i.gifer.com/ILN0.gif',
+      },
+      {
+        name: 'Энхманлай',
+        age: 22,
+        role: 'Программ хөгжүүлэгч',
+        fact: 'Тэр найзуудтайгаа клуб-д таарсан бөгөөд төд удалгүй яваад өгсөн',
+        gif: 'https://media.tenor.com/nMX4Hij3bGUAAAAM/drunk-sleep.gif',
+      },
+      {
+        name: 'Ариунсанаа',
+        age: 21,
+        role: 'Программ хөгжүүлэгч',
+        fact: 'Тэр Наашаа Тек-ийн шинэ жилийн зохион байгуулагч, хөтлөгч нь байсан бөгөөд клуб ороод нам болсон',
+        gif: 'https://media3.giphy.com/media/jQnOTbkWMUCcPV7T4S/200w.gif?cid=6c09b9525vnhqib9b0uqd74puq45yjtmst65uzfw5srljoo1&ep=v1_gifs_search&rid=200w.gif&ct=g',
+      },
+      {
+        name: 'Мөнхдэлгэр',
+        age: 22,
+        role: 'Программ хөгжүүлэгч',
+        fact: 'Тэр EON клубт 4 дэх удаагаа шоудсан юм',
+        gif: 'https://media2.giphy.com/media/S6FQD71WfKyyjh0Ho9/giphy.gif',
+      },
+      {
+        name: 'Даваадулам',
+        age: 23,
+        role: 'Программ хөгжүүлэгч',
+        fact: 'Тэр бүхэл шөнөжин бүжиглэсэн ч бага уусан',
+        gif: 'https://media3.giphy.com/media/Unyhc6qYk15cPES6CG/200w.gif?cid=6c09b952534b8wqq9lxhl6s2zf3dmleovensbrsv34alk9w3&ep=v1_gifs_search&rid=200w.gif&ct=g',
+      },
+      {
+        name: 'Тэмүүжин',
+        age: 18,
+        role: 'Дадлагажигч',
+        gif: 'https://media0.giphy.com/media/b2VxjMhx8nnjy/giphy.gif',
+        fact: 'Тэр ер нь уугаагүй бөгөөд маш томоотой байсан',
+      },
+    ]
+
+    function displayMemberInfo(memberIndex) {
+      const memberInfoContainer = document.getElementById('memberInfo');
+      const { name, age, role, fact, gif } = members[memberIndex - 1];
+
+      const html = `
+        <div class="one">
+          <span></span>
+          <h2>Нэр: ${name}</h2>
+          <br>
+          <h2>Нас: ${age}</h2>
+          <br>
+          <h2>${role}</h2>
+          <br>
+          <h2>Факт: ${fact}</h2>
+        </div>
+        <div class="two">
+          <img src=${gif} style="z-index: 10" alt="gif">
+        </div>
+      `;
+
+      memberInfoContainer.innerHTML = html;
+
+      openSidebar();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const backgroundSound = document.getElementById('backgroundSound');
+
+      document.addEventListener("click", function() {
+        backgroundSound.play();
+        document.removeEventListener("click", arguments.callee);
+      });
+    })
+  </script>
+</body>
+</html>
